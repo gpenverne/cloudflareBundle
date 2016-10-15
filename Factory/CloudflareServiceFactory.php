@@ -2,7 +2,7 @@
 
 namespace Gpenverne\CloudflareBundle\Factory;
 
-use Gpenverne\CloudflareBundle\Servies\CloudflareService;
+use Gpenverne\CloudflareBundle\Services\CloudflareService;
 
 class CloudflareServiceFactory
 {

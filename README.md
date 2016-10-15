@@ -31,6 +31,8 @@ public function registerBundles()
 
 ## Use it
 ```php
+use Gpenverne\CloudflareService;
+
 $cloudflareService = $this->container->get('cloudflare.service');
 
 // Listing all zones

@@ -3,17 +3,17 @@
 namespace Gpenverne\cloudflareBundle\Services;
 
 use Cloudflare\Api;
-use Cloudflare\Zone;
 use Cloudflare\Cache;
-use Cloudflare\Zone\Dns;
-use Cloudflare\Zone\Pagerules;
-use Cloudflare\Zone\Settings;
-use Cloudflare\Zone\CustomPages;
-use Cloudflare\Zone\Plan;
-use Cloudflare\Zone\SSL;
-use Cloudflare\Zone\LoadBalancers;
-use Cloudflare\Zone\CustomSSL;
+use Cloudflare\Zone;
 use Cloudflare\Zone\Analytics;
+use Cloudflare\Zone\CustomPages;
+use Cloudflare\Zone\CustomSSL;
+use Cloudflare\Zone\Dns;
+use Cloudflare\Zone\LoadBalancers;
+use Cloudflare\Zone\Pagerules;
+use Cloudflare\Zone\Plan;
+use Cloudflare\Zone\Settings;
+use Cloudflare\Zone\SSL;
 
 class CloudflareService
 {

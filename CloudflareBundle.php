@@ -2,8 +2,8 @@
 
 namespace Gpenverne\cloudflareBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Gpenverne\DependencyInjection\CloudflareExtension;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class CloudflareBundle extends Bundle
 {

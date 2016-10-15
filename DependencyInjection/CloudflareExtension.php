@@ -1,6 +1,6 @@
 <?php
 
-namespace Gpenverne\cloudflare\DependencyInjection;
+namespace Gpenverne\Cloudflare\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

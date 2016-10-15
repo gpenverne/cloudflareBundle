@@ -1,6 +1,6 @@
 <?php
 
-namespace Gpenverne\cloudflareBundle;
+namespace Gpenverne\CloudflareBundle;
 
 use Gpenverne\DependencyInjection\CloudflareExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;

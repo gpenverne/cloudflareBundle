@@ -1,6 +1,6 @@
 <?php
 
-namespace Gpenverne\cloudflareBundle\Services;
+namespace Gpenverne\CloudflareBundle\Services;
 
 use Cloudflare\Api;
 use Cloudflare\Cache;

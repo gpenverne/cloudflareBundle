@@ -1,0 +1,22 @@
+{
+    "name": "gpenverne/cloudflare-bundle",
+    "type": "symfony-bundle",
+    "description": "This Bundle implements the Cloudflare API",
+    "keywords": ["cloudflare", "api"],
+    "license": "MIT",
+    "authors": [{
+        "name": "Gregoire Penverne",
+        "homepage": "https://github.com/gpenverne"
+    }],
+    "require": {
+        "php": ">=7.0",
+        "symfony/symfony": "^3.0",
+        "jamesryanbell/cloudflare": "^1.8"
+    },
+    "autoload": {
+        "psr-0": {
+            "Gpenverne\\CloudflareBundle": ""
+        }
+    },
+    "target-dir": "Gpenverne/CloudflareBundle"
+}

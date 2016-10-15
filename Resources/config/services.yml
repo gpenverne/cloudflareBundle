@@ -1,0 +1,6 @@
+services:
+    cloudflare.service:
+        class: Gpenverne\CloudFlare\Services\CloudflareService
+        arguments:
+            - "%cloudflare.api_email%"
+            - "%cloudflare.api_key%"

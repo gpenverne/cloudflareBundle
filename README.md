@@ -39,3 +39,14 @@ $zones = $cloudflareService->getZone()->zones();
 // Get a dns_record information using the cloudflare endpoint
 $cloudflareService->getApi()->get(sprintf('zones/%s/dns_records', 'aZoneId'));
 ```
+
+
+## Trouble with php version?
+If others packages need a php5 version, composer can fail with error:
+```
+ This package requires php >=7.0 but your PHP version (x.x.x) does not satisfy that requirement.
+```
+To force install ignoring php version:
+```bash
+$ composer require gpenverne/cloudflare-bundle --ignore-platform-reqs
+```

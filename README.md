@@ -46,7 +46,4 @@ If others packages need a php5 version, composer can fail with error:
 ```
  This package requires php >=7.0 but your PHP version (x.x.x) does not satisfy that requirement.
 ```
-To force install ignoring php version:
-```bash
-$ composer require gpenverne/cloudflare-bundle --ignore-platform-reqs
-```
+You can overwrite the php version check using the --ignore-platform-reqs composer option

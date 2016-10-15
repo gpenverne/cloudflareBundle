@@ -9,7 +9,6 @@
         "homepage": "https://github.com/gpenverne"
     }],
     "require": {
-        "php": ">=7.0",
         "symfony/symfony": "^3.0",
         "jamesryanbell/cloudflare": "^1.8"
     },

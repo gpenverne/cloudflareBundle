@@ -18,24 +18,13 @@ use Cloudflare\Zone\SSL;
 class CloudflareService
 {
     /**
-     * @var string
-     */
-    private $api_email;
-
-    /**
-     * @var string
-     */
-    private $api_key;
-
-    /**
      * @var Api
      */
-    private $api;
+    private $cloudflareClient;
 
     public function __construct(string $api_email, string $api_key)
     {
-        $this->api_key = $api_key;
-        $this->api_email = $api_email;
+        $this->cloudflareClient = new Api($api_email, $api_key);
     }
 
     /**
@@ -43,12 +32,6 @@ class CloudflareService
      */
     public function getApi(): Api
     {
-        if ($this->cloudflareClient) {
-            return $this->cloudflareClient;
-        }
-
-        $this->cloudflareClient = new Api($this->api_email, $api_key);
-
         return $this->cloudflareClient;
     }
 

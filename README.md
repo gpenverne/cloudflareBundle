@@ -1,5 +1,6 @@
 # CloudflareBundle
-A bundle for the [`Jamesryanbell cloudflare api library`](https://github.com/jamesryanbell).
+A Symfony3 bundle for the [`Jamesryanbell cloudflare api library`](https://github.com/jamesryanbell).
+Needs php7.
 
 ## Install
 ```bash
@@ -25,7 +26,7 @@ public function registerBundles()
 ```yaml
 # app/config/parameters.yml
 ...
-    cloudflare.api_email: your-cloud-account@email.com
+    cloudflare.api_email: your-cloudflare-account@email.com
     cloudflare.api_key: your_cloudflare_api_key
 ```
 
@@ -39,11 +40,3 @@ $zones = $cloudflareService->getZone()->zones();
 // Get a dns_record information using the cloudflare endpoint
 $cloudflareService->getApi()->get(sprintf('zones/%s/dns_records', 'aZoneId'));
 ```
-
-
-## Trouble with php version?
-If others packages need a php5 version, composer can fail with error:
-```
- This package requires php >=7.0 but your PHP version (x.x.x) does not satisfy that requirement.
-```
-You can overwrite the php version check using the --ignore-platform-reqs composer option

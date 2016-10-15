@@ -1,6 +1,10 @@
 services:
+    cloudflare.service_factory:
+        class: Gpenverne\CloudflareBundle\Factory\CloudflareServiceFactory
+
     cloudflare.service:
         class: Gpenverne\CloudflareBundle\Services\CloudflareService
+        factory: ['@cloudflare.service_factory', createCloudflareService]
         arguments:
             - "%cloudflare.api_email%"
             - "%cloudflare.api_key%"

@@ -22,6 +22,10 @@ class CloudflareService
      */
     private $cloudflareClient;
 
+    /**
+     * @var string
+     * @var string $api_key
+     */
     public function __construct(string $api_email, string $api_key)
     {
         $this->cloudflareClient = new Api($api_email, $api_key);

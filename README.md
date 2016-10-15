@@ -32,4 +32,10 @@ public function registerBundles()
 ## Use it
 ```php
 $cloudflareService = $this->container->get('cloudflare.service');
+
+// Listing all zones
+$zones = $cloudflareService->getZone()->zones();
+
+// Get a dns_record information using the cloudflare endpoint
+$cloudflareService->getApi()->get(sprintf('zones/%s/dns_records', 'aZoneId'));
 ```

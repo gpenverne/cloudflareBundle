@@ -10,7 +10,6 @@
     }],
     "require": {
         "symfony/symfony": ">=2.8",
-        "jamesryanbell/cloudflare": "^1",
         "cloudflare/sdk": "^1.0"
     },
     "require-dev": {

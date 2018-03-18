@@ -50,4 +50,16 @@ foreach ($zones->listZones()->result as $zone) {
     echo PHP_EOL;
 
 }
+
+// Add a domain to a zone
+try {
+    return $cloudflareService->dns->addRecord(
+        $zone->id,
+        'CNAME',
+        'my-subdomain',
+        'my-domain.com'
+    );
+} catch (\Exception $e) {
+    return false;
+}
 ```

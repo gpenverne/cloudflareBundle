@@ -1,5 +1,5 @@
 # CloudflareBundle
-A Symfony3 bundle for the [`Jamesryanbell cloudflare api library`](https://github.com/jamesryanbell).
+A Symfony3 bundle for the [PHP library for the Cloudflare v4 API `](https://github.com/cloudflare/cloudflare-php).
 Needs php7.
 
 ## Install
@@ -34,9 +34,12 @@ public function registerBundles()
 ```php
 $cloudflareService = $this->container->get('cloudflare.service');
 
-// Listing all zones
-$zones = $cloudflareService->getZone()->zones();
+// Retrieve a Cloudflare SDK endpoint
+$userEndpoint = $cloudflareService->get('User');
 
-// Get a dns_record information using the cloudflare endpoint
-$cloudflareService->getApi()->get(sprintf('zones/%s/dns_records', 'aZoneId'));
+// Or use built-in shortcut
+$userEndpoint = $cloudflareService->user;
+
+// Listing all zones
+$zones = $cloudflareService->zones->listZones();
 ```

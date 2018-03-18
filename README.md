@@ -1,6 +1,5 @@
 # CloudflareBundle
 A Symfony3 bundle for the [PHP library for the Cloudflare v4 API `](https://github.com/cloudflare/cloudflare-php).
-Needs php7.
 
 ## Install
 ```bash
@@ -42,4 +41,13 @@ $userEndpoint = $cloudflareService->user;
 
 // Listing all zones
 $zones = $cloudflareService->zones->listZones();
+
+// Adapted example from extracted from https://support.cloudflare.com/hc/en-us/articles/115001661191
+$zones = $cloudflareService->zones;
+foreach ($zones->listZones()->result as $zone) {
+    echo "Cache purge for " . $zone->name . ": ";
+    echo $zones->cachePurgeEverything($zone->id) == true ? "successful" : "failed";
+    echo PHP_EOL;
+
+}
 ```

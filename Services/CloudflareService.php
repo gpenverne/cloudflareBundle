@@ -2,88 +2,89 @@
 
 namespace Gpenverne\CloudflareBundle\Services;
 
-use Cloudflare\Api;
-use Cloudflare\Zone\Cache;
-use Cloudflare\Zone;
-use Cloudflare\Zone\Analytics;
-use Cloudflare\Zone\CustomPages;
-use Cloudflare\Zone\CustomSSL;
-use Cloudflare\Zone\Dns;
-use Cloudflare\Zone\LoadBalancers;
-use Cloudflare\Zone\Pagerules;
-use Cloudflare\Zone\Plan;
-use Cloudflare\Zone\Settings;
-use Cloudflare\Zone\SSL;
+use Cloudflare\API\Adapter\Guzzle;
+use Cloudflare\API\Endpoints;
 
 class CloudflareService
 {
     /**
-     * @var Api
+     * @var Guzzle
      */
-    private $cloudflareClient;
+    private $client;
 
-    public function __construct(string $api_email, string $api_key)
+    /**
+     * @var \Cloudflare\API\Endpoints\AccessRules
+     */
+    public $accessRules;
+
+    /**
+     * @var \Cloudflare\API\Endpoints\DNS
+     */
+    public $dns;
+
+    /**
+     * @var \Cloudflare\API\Endpoints\IPs
+     */
+    public $ips;
+
+    /**
+     * @var \Cloudflare\API\Endpoints\PageRules
+     */
+    public $pageRules;
+
+    /**
+     * @var \Cloudflare\API\Endpoints\Railgun
+     */
+    public $railGun;
+
+    /**
+     * @var \Cloudflare\API\Endpoints\UARules
+     */
+    public $uaRules;
+
+    /**
+     * @var \Cloudflare\API\Endpoints\User
+     */
+    public $user;
+
+    /**
+     * @var \Cloudflare\API\Endpoints\WAF
+     */
+    public $waf;
+
+    /**
+     * @var \Cloudflare\API\Endpoints\Zones
+     */
+    public $zones;
+
+    /**
+     * @var \Cloudflare\API\Endpoints\ZonesLockDown
+     */
+    public $zonesLockDown;
+
+    public function __construct(Guzzle $client)
     {
-        $this->cloudflareClient = new Api($api_email, $api_key);
+        $this->client = $client;
+        $this->dns = $this->get('DNS');
+        $this->ips = $this->get('IPs');
+        $this->pageRules = $this->get('PageRules');
+        $this->railGun = $this->get('Railgun');
+        $this->uaRules = $this->get('UARules');
+        $this->user = $this->get('User');
+        $this->waf = $this->get('WAF');
+        $this->zones = $this->get('Zones');
+        $this->zoneLockDown = $this->get('ZoneLockdown');
     }
 
-    public function getApi(): Api
+    public function __get($endpoint): Endpoints\API
     {
-        return $this->cloudflareClient;
+        return $this->get($endpoint);
     }
 
-    public function getZone(): Zone
+    public function get($endpoint): Endpoints\API
     {
-        return new Zone($this->getApi());
-    }
+        $className = sprintf('\Cloudflare\API\Endpoints\%s', $endpoint);
 
-    public function getDns(): Dns
-    {
-        return new Dns($this->getApi());
-    }
-
-    public function getPagerules(): Pagerules
-    {
-        return new Pagerules($this->getApi());
-    }
-
-    public function getSettings(): Settings
-    {
-        return new Settings($this->getApi());
-    }
-
-    public function getCustomPages(): CustomPages
-    {
-        return new CustomPages($this->getApi());
-    }
-
-    public function getPlan(): Plan
-    {
-        return new Plan($this->getApi());
-    }
-
-    public function getSSL(): SSL
-    {
-        return new SSL($this->getApi());
-    }
-
-    public function getLoadBalancers(): LoadBalancers
-    {
-        return new LoadBalancers($this->getApi());
-    }
-
-    public function getCustomSSL(): CustomSSL
-    {
-        return new CustomSSL($this->getApi());
-    }
-
-    public function getAnalytics(): Analytics
-    {
-        return new Analytics($this->getApi());
-    }
-
-    public function getCache(): Cache
-    {
-        return new Cache($this->getApi());
+        return new $className($this->client);
     }
 }

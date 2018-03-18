@@ -2,18 +2,6 @@
 
 namespace Gpenverne\CloudflareBundle\Services;
 
-use Cloudflare\Api;
-use Cloudflare\Zone\Cache;
-use Cloudflare\Zone;
-use Cloudflare\Zone\Analytics;
-use Cloudflare\Zone\CustomPages;
-use Cloudflare\Zone\CustomSSL;
-use Cloudflare\Zone\Dns;
-use Cloudflare\Zone\LoadBalancers;
-use Cloudflare\Zone\Pagerules;
-use Cloudflare\Zone\Plan;
-use Cloudflare\Zone\Settings;
-use Cloudflare\Zone\SSL;
 use Cloudflare\API\Adapter\Guzzle;
 use Cloudflare\API\Endpoints;
 
@@ -45,7 +33,7 @@ class CloudflareService
     public $pageRules;
 
     /**
-     * @var \Cloudflare\API\Endpoints\RailGun
+     * @var \Cloudflare\API\Endpoints\Railgun
      */
     public $railGun;
 
@@ -80,7 +68,7 @@ class CloudflareService
         $this->dns = $this->get('DNS');
         $this->ips = $this->get('IPs');
         $this->pageRules = $this->get('PageRules');
-        $this->railGun = $this->get('RailGun');
+        $this->railGun = $this->get('Railgun');
         $this->uaRules = $this->get('UARules');
         $this->user = $this->get('User');
         $this->waf = $this->get('WAF');

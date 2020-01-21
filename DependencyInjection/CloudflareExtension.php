@@ -6,6 +6,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Gpenverne\CloudflareBundle\Services\CloudflareService;
 
 class CloudflareExtension extends Extension
 {
@@ -16,5 +17,10 @@ class CloudflareExtension extends Extension
             new FileLocator(__DIR__.'/../Resources/config')
         );
         $loader->load('services.yml');
+
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+        $definition = $container->getDefinition(CloudflareService::class);
+        $definition->replaceArgument(0, $config['api_token']);
     }
 }

@@ -6,10 +6,10 @@
     "license": "MIT",
     "authors": [{
         "name": "Gregoire Penverne",
-        "homepage": "https://github.com/gpenverne"
+        "homepage": "https://gregoire-penverne.fr"
     }],
     "require": {
-        "symfony/symfony": ">=2.8",
+        "symfony/symfony": ">=4.0",
         "cloudflare/sdk": "^1.0"
     },
     "require-dev": {

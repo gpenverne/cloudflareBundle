@@ -2,8 +2,11 @@
 
 namespace Gpenverne\CloudflareBundle\Services;
 
-use Cloudflare\API\Adapter\Guzzle;
 use Cloudflare\API\Endpoints;
+use Cloudflare\API\Auth\APIKey;
+use Cloudflare\API\Adapter\Guzzle;
+use Cloudflare\API\Endpoints\User;
+use Gpenverne\CloudflareBundle\Auth\APIToken;
 
 class CloudflareService
 {
@@ -28,6 +31,11 @@ class CloudflareService
     public $ips;
 
     /**
+     * @var \Cloudflare\API\Endpoints\LoadBalancers
+     */
+    public $loadBalancers;
+
+    /**
      * @var \Cloudflare\API\Endpoints\PageRules
      */
     public $pageRules;
@@ -36,6 +44,16 @@ class CloudflareService
      * @var \Cloudflare\API\Endpoints\Railgun
      */
     public $railGun;
+
+    /**
+     * @var \Cloudflare\API\Endpoints\SSL
+     */
+    public $ssl;
+
+    /**
+     * @var \Cloudflare\API\Endpoints\TLS
+     */
+    public $tls;
 
     /**
      * @var \Cloudflare\API\Endpoints\UARules
@@ -62,13 +80,19 @@ class CloudflareService
      */
     public $zonesLockDown;
 
-    public function __construct(Guzzle $client)
+    public function __construct($apiToken)
     {
-        $this->client = $client;
+        $key = new APIToken($apiToken);
+        $adapter = new Guzzle($key);
+
+        $this->client = $adapter;
         $this->dns = $this->get('DNS');
         $this->ips = $this->get('IPs');
+        $this->loadBalancers = $this->get('LoadBalancers');
         $this->pageRules = $this->get('PageRules');
         $this->railGun = $this->get('Railgun');
+        $this->ssl = $this->get('SSL');
+        $this->tls = $this->get('TLS');
         $this->uaRules = $this->get('UARules');
         $this->user = $this->get('User');
         $this->waf = $this->get('WAF');

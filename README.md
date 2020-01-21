@@ -6,32 +6,21 @@ A Symfony3 bundle for the [PHP library for the Cloudflare v4 API `](https://gith
 $ composer require gpenverne/cloudflare-bundle
 ```
 
-## Load the bundle
-```php
-// app/config/AppKernel.php
-
-public function registerBundles()
-{
-    $bundles = [
-        // ...
-        new Gpenverne\CloudflareBundle\CloudflareBundle(),
-        // ...
-    ];
-    // ...
-}
-```
-
 ## Configuration
+You have to generate a "APIToken" from your cloudflare "My Profile" > "API Tokens" page
 ```yaml
-# app/config/parameters.yml
+# app/config/packages/cloudflare.yaml
 ...
-    cloudflare.api_email: your-cloudflare-account@email.com
-    cloudflare.api_key: your_cloudflare_api_key
+cloudflare:
+    api_token: your_cloudflare_api_token
 ```
 
 ## Use it
 ```php
 $cloudflareService = $this->container->get('cloudflare.service');
+// Or ...
+$cloudflareService = $this->container->get(Gpenverne\CloudflareBundle\Services\CloudflareService::class)
+// Or inject in your constructors
 
 // Retrieve a Cloudflare SDK endpoint
 $userEndpoint = $cloudflareService->get('User');

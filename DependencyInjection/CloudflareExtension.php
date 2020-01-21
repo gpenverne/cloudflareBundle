@@ -5,7 +5,9 @@ namespace Gpenverne\CloudflareBundle\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Extension\Extension;
+use Gpenverne\CloudflareBundle\Services\CloudflareService;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Gpenverne\CloudflareBundle\Services\CloudflareService;
 
 class CloudflareExtension extends Extension
@@ -18,6 +20,9 @@ class CloudflareExtension extends Extension
         );
         $loader->load('services.yml');
 
+        if (!method_exists(ArrayNodeDefinition::class, 'buildTree')) {
+            return;
+        }
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
         $definition = $container->getDefinition(CloudflareService::class);

@@ -1,7 +1,10 @@
+parameters:
+    cloudflare.api_token: some-cloudflare-api_token
+
 services:
     Gpenverne\CloudflareBundle\Services\CloudflareService:
         public: true
-        arguments: [""]
+        arguments: ["%cloudflare.api_token%"]
 
     cloudflare.service:
         alias: Gpenverne\CloudflareBundle\Services\CloudflareService

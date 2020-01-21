@@ -8,9 +8,13 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder('cloudflare');
+        if (!method_exists(TreeBuilder::class, 'getRootNode')) {
+            return;
+        }
 
-        $treeBuilder->getRootNode()
+        $treeBuilder = new TreeBuilder('cloudflare');
+        $treeBuilder
+            ->getRootNode()
             ->children()
 	            ->scalarNode('api_token')->end()
             ->end()

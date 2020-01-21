@@ -14,6 +14,12 @@ You have to generate a "APIToken" from your cloudflare "My Profile" > "API Token
 cloudflare:
     api_token: your_cloudflare_api_token
 ```
+Or for older versions of symfony:
+```yaml
+# app/config/parameters.yml
+parameters:
+    cloudflare.api_token: some-cloudflare-api_token
+```
 
 ## Use it
 ```php

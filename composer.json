@@ -9,11 +9,9 @@
         "homepage": "https://gregoire-penverne.fr"
     }],
     "require": {
-        "symfony/symfony": ">=4.0",
+        "symfony/dependency-injection": "^5.0||^4.0||^3.0",
+        "symfony/config":  "^5.0||^4.0||^3.0",
         "cloudflare/sdk": "^1.0"
-    },
-    "require-dev": {
-        "phpstan/phpstan": "^0.9.2"
     },
     "autoload": {
         "psr-0": {

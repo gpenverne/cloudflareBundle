@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Gpenverne\CloudflareBundle\Services\CloudflareService;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class CloudflareExtension extends Extension
 {
@@ -21,6 +22,7 @@ class CloudflareExtension extends Extension
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+
         if (!isset($config['api_token'])) {
             return;
         }

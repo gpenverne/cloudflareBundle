@@ -76,9 +76,9 @@ class CloudflareService
     public $zones;
 
     /**
-     * @var \Cloudflare\API\Endpoints\ZonesLockDown
+     * @var \Cloudflare\API\Endpoints\ZoneLockdown
      */
-    public $zonesLockDown;
+    public $zoneLockdown;
 
     public function __construct($apiToken)
     {
@@ -97,7 +97,7 @@ class CloudflareService
         $this->user = $this->get('User');
         $this->waf = $this->get('WAF');
         $this->zones = $this->get('Zones');
-        $this->zoneLockDown = $this->get('ZoneLockdown');
+        $this->zoneLockdown = $this->get('ZoneLockdown');
     }
 
     public function __get($endpoint): Endpoints\API

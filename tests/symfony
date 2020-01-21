@@ -6,7 +6,7 @@ echo "============================"
 composer create-project --no-interaction symfony/$1  $1-$2 "$2.*" > /dev/null|| echo "Symfony folder already exists"
 cd $1-$2
 EXITCODE=0
-composer require gpenverne/cloudflare-bundle||EXITCODE=1
+composer require gpenverne/cloudflare-bundle:dev-master||EXITCODE=1
 rm -rf $1-$2
 
 exit $EXITCODE

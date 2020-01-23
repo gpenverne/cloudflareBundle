@@ -18,24 +18,39 @@ orbs:
                 working_directory: ~/project
                 steps:
                   - checkout
-                  - run: composer install
+                  - run:
+                        name: Install dependencies
+                        command: |
+                            composer install
                   - persist_to_workspace:
                       root: ~/
                       paths:
                         - project
-                  - run: cd ~/project/tests && make tests
+                  - run:
+                        name: Test install on symfony version
+                        command: |
+                            cd ~/project/tests &&
+                            make tests
             phpstan:
                 executor: phpstan
                 working_directory: ~/project
                 steps:
                     - attach_workspace:
                         at: ~/
-                    - run: phpstan analyse --level 5 Services
+                    - run:
+                        name: PHPStan static code analyze
+                        command: |
+                            phpstan analyse --level 5 Services &&
+                            phpstan analyse --level 5 Auth &&
+                            phpstan analyse --level 5 DependencyInjection
             php-cs-fixer:
                 executor: php-cs-fixer
                 working_directory: ~/project
                 steps:
-                    - run: php-cs-fixer fix --dry-run --diff ~/project
+                    - run:
+                        name: PHP coding style check
+                        command: |
+                            php-cs-fixer fix --dry-run --diff ~/project
 workflows:
     build_and_test:
         jobs:

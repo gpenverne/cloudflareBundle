@@ -16,8 +16,8 @@
         "cloudflare/sdk": "^1.0"
     },
     "autoload": {
-        "psr-0": {
-            "Gpenverne\\CloudflareBundle": "src/"
+        "psr-4": {
+            "Gpenverne\\CloudflareBundle\\": "src/"
         }
     },
     "target-dir": "Gpenverne/CloudflareBundle"

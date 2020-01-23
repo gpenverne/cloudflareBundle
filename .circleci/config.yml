@@ -40,9 +40,7 @@ orbs:
                     - run:
                         name: PHPStan static code analyze
                         command: |
-                            phpstan analyse --level 5 Services &&
-                            phpstan analyse --level 5 Auth &&
-                            phpstan analyse --level 5 --configuration=tests/phpstan.neon DependencyInjection
+                            phpstan analyse --level 5 src
             php-cs-fixer:
                 executor: php-cs-fixer
                 working_directory: ~/project

@@ -1,33 +1,49 @@
-# PHP CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-php/ for more details
-#
-version: 2
-jobs:
-  build:
-    docker:
-      # Specify the version you desire here
-      - image: circleci/php:7.1-node-browsers
-
-    steps:
-      - checkout
-
-      - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
-      - run: sudo docker-php-ext-install zip
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            # "composer.lock" can be used if it is committed to the repo
-            - v1-dependencies-{{ checksum "composer.json" }}
-
-      - run: composer install -n --prefer-dist
-
-      - save_cache:
-          key: v1-dependencies-{{ checksum "composer.json" }}
-          paths:
-            - ./vendor
-            - ~/.composer/cache
-
-      - run: cd tests && make tests
-
+version: 2.1
+orbs:
+    php:
+        executors:
+            composer:
+                docker:
+                    - image: composer
+            phpstan:
+                docker:
+                    - image: phpstan/phpstan:latest
+            php-cs-fixer:
+                docker:
+                    - image: herloct/php-cs-fixer:latest
+        jobs:
+            install:
+                executor: composer
+                working_directory: /var/www/project
+                steps:
+                  - checkout
+                  - run: composer install
+                  - persist_to_workspace:
+                      root: /var/www/
+                      paths:
+                        - project
+                  - run: make tests
+            phpstan:
+                executor: phpstan
+                working_directory: /var/www/project
+                steps:
+                    - attach_workspace:
+                        at: /var/www/
+                    - run: phpstan analyse --level 5 src
+            php-cs-fixer:
+                executor: php-cs-fixer
+                working_directory: /var/www/
+                steps:
+                    - attach_workspace:
+                        at: /var/www/
+                    - run: php-cs-fixer fix --dry-run --diff /var/www/project/src
+workflows:
+    build_and_test:
+        jobs:
+            - php/install
+            - php/phpstan:
+                requires:
+                  - php/install
+            - php/php-cs-fixer:
+                requires:
+                  - php/install

@@ -1,4 +1,4 @@
-version: 2.1
+version: 2
 orbs:
     php:
         executors:
@@ -22,7 +22,7 @@ orbs:
                       root: /var/www/
                       paths:
                         - project
-                  - run: make tests
+                  - run: cd /var/www && make tests
             phpstan:
                 executor: phpstan
                 working_directory: /var/www/project
@@ -34,8 +34,6 @@ orbs:
                 executor: php-cs-fixer
                 working_directory: /var/www/
                 steps:
-                    - attach_workspace:
-                        at: /var/www/
                     - run: php-cs-fixer fix --dry-run --diff /var/www/project/src
 workflows:
     build_and_test:

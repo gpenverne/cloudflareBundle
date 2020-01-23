@@ -100,12 +100,12 @@ class CloudflareService
         $this->zoneLockdown = $this->get('ZoneLockdown');
     }
 
-    public function __get($endpoint): Endpoints\API
+    public function __get($endpoint)
     {
         return $this->get($endpoint);
     }
 
-    public function get($endpoint): Endpoints\API
+    public function get($endpoint)
     {
         $className = sprintf('\Cloudflare\API\Endpoints\%s', $endpoint);
 

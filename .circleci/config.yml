@@ -15,27 +15,27 @@ orbs:
         jobs:
             install:
                 executor: composer
-                working_directory: /var/www/project
+                working_directory: ~/project
                 steps:
                   - checkout
                   - run: composer install
                   - persist_to_workspace:
-                      root: /var/www/
+                      root: ~/
                       paths:
                         - project
-                  - run: cd /var/www && make tests
+                  - run: cd ~/project/tests && make tests
             phpstan:
                 executor: phpstan
-                working_directory: /var/www/project
+                working_directory: ~/project
                 steps:
                     - attach_workspace:
-                        at: /var/www/
-                    - run: phpstan analyse --level 5 src
+                        at: ~/
+                    - run: phpstan analyse --level 5 Services
             php-cs-fixer:
                 executor: php-cs-fixer
-                working_directory: /var/www/
+                working_directory: ~/project
                 steps:
-                    - run: php-cs-fixer fix --dry-run --diff /var/www/project/src
+                    - run: php-cs-fixer fix --dry-run --diff ~/project
 workflows:
     build_and_test:
         jobs:
